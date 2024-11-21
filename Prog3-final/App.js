@@ -5,6 +5,7 @@ import NavegacionPrincipal from './src/navigation/NavegacionPrincipal';
 import Login from './src/screens/Login';
 import Home from './src/screens/Home';
 import FormularioRegister from './src/components/FormularioRegister';
+import FormularioHome from './src/components/FormularioHome';
 const Stack = createNativeStackNavigator()
 
 export default function App() {
@@ -21,7 +22,7 @@ export default function App() {
         <Stack.Screen
         options= {{ headerShown: false}}
         name= "Login"
-        component ={Login}
+        component ={FormularioHome}
         />
          <Stack.Screen
         options= {{ headerShown: false}}
@@ -34,4 +35,9 @@ export default function App() {
   );
 }
 
-const styles= StyleSheet.create({})
+const styles= StyleSheet.create({
+  container: {
+    flex: 1, 
+    backgroundColor: '#f5f5f5', 
+  },
+})

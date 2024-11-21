@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
         marginBottom: 10
     }, 
     btn: {
-        background: 'blue',
+        backgroundColor: 'blue',
         marginBottom: 10
     }
 })

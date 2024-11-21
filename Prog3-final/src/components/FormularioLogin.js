@@ -2,55 +2,31 @@ import { Text, View, TextInput, TouchableOpacity, StyleSheet } from 'react-nativ
 import React, { Component } from 'react';
 import { auth, db } from '../firebase/config';
 
-export default class FormularioRegister extends Component {
+export default class FormularioLogin extends Component {
     constructor(props) {
         super(props);
         this.state = {
             email: '',
-            username: '',
             password: '',
-            
-            registered: false,
+            login: false,
             error: ''
         };
     }
 
-    submit(email, username, password){
-        if(!email.includes('@')){
-            this.setState({error: 'Ingrese un formato de email valido'})
-            return
-        }
-        
-        if(username.length < 2){
-            this.setState({error: 'Ingrese un username'})
-            return
-        }
+    componentDidMount(){
+        auth.onAuthStateChanged(user=> console.log("El usuario es: ", JSON.stringify(user,null,4)))
+    }
+    submit(email, password){
 
-        if(password.length < 5){
-            this.setState({error: 'Ingrese una password mas larga'})
-            return
-        }
-
-        auth.createUserWithEmailAndPassword(email, password)
-        .then((user) => {
-            if(user){
-                db.collection('users').add({
-                    owner: auth.currentUser.email,
-                    createdAt: Date.now(),
-                    username: username,
-                    imagenPerfil: ''
-                })
-                .then(
-                    () => this.props.navigation.navigate('anidada')
-                )
-
-                
-            }
+        auth.signInWithWithEmailAndPassword(email, password)
+        .then((user) => { this.setState({logued: true})
+        .then(()=> this.props.navigation.navigate("home"))
+           
         })
         .catch(err => {
-            if (err.code === "auth/email-already-in-use"){
-                this.setState({error: 'el email ya esta en uso'})
-            }
+          
+                this.setState({error: 'Fallo login'})
+            
         })
 
     }
@@ -64,13 +40,6 @@ export default class FormularioRegister extends Component {
                     keyboardType="email-address"
                     onChangeText={(text) => this.setState({ email: text, error: '' })}
                     value={this.state.email}
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder="Ingrese su username"
-                    keyboardType="default"
-                    onChangeText={(text) => this.setState({ username: text, error: '' })}
-                    value={this.state.username}
                 />
                 
                 <TextInput
@@ -89,16 +58,15 @@ export default class FormularioRegister extends Component {
                     onPress={() =>
                         this.submit(
                             this.state.email,
-                            this.state.username,
                             this.state.password
                         )
                     }
                 >
                     <TouchableOpacity
-                         onPress={()=> this.props.navigation.navigate("login")}>
+                         onPress={()=> this.props.navigation.navigate("home")}>
                     
                     <Text style={{ color: 'white', textAlign: 'center' }}>
-                       Registrarse
+                       Loguearse
                         </Text>
                         </TouchableOpacity>
                 </TouchableOpacity>

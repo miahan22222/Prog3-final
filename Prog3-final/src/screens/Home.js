@@ -1,6 +1,6 @@
 import { Text, View ,FlatList, StyleSheet, TouchableOpacity} from 'react-native'
 import React, { Component } from 'react'
-import FormularioHome from '../components/FormularioHome'
+import FormularioHome from '../components/FormularioLogin'
 
 class Home extends Component {
   constructor(props){

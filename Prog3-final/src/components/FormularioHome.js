@@ -7,7 +7,7 @@ export default class FormularioHome extends Component {
         super(props)
         this.state = {
             username: '',
-            comentario: ''
+            
         }
     }
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Login from '../screens/Login'
 import Register from '../screens/Register'
-import NavegacionAnidada from './NavegacionAnidada'
+//import NavegacionAnidada from './NavegacionAnidada'
 
 const Stack = createNativeStackNavigator()
 

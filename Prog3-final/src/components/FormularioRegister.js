@@ -9,6 +9,7 @@ export default class FormularioRegister extends Component {
             email: '',
             username:'',
             password:'',
+            registered: false,
             error:''
         }
     }
@@ -98,6 +99,7 @@ export default class FormularioRegister extends Component {
             >
                 <Text>Registrarse</Text>
             </TouchableOpacity>
+            
         </View>
         )
     }

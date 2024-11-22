@@ -9,52 +9,52 @@ export default class FormularioRegister extends Component {
             email: '',
             username: '',
             password: '',
-            
-            registered: false,
             error: ''
         };
     }
 
     submit(email, username, password){
-        if(!email.includes('@')){
-            this.setState({error: 'Ingrese un formato de email valido'})
-            return
+        if (!email.includes('@') ){
+            this.setState({ error: 'Ingrese un formato de email valido/ Complete el campo' });
+            return;
         }
-        
-        if(username.length < 2){
-            this.setState({error: 'Ingrese un username'})
-            return
+    
+        if (username.length < 2) {
+            this.setState({ error: 'Ingrese un username/ Complete el campo' });
+            return;
         }
-
-        if(password.length < 5){
-            this.setState({error: 'Ingrese una password mas larga'})
-            return
+    
+        if (password.length < 5) {
+            this.setState({ error: 'Ingrese una password más larga/ Complete el campo' });
+            return;
         }
-
+    
         auth.createUserWithEmailAndPassword(email, password)
-        .then((user) => {
-            if(user){
-                db.collection('users').add({
+            .then(() => {
+                // Cuando el usuario se crea con éxito, lo desconectamos inmediatamente xq sino entiende que se logueo 
+                //en firebase y no funciona, solo se registra no deberia entender como que se logueo
+                auth.signOut().then(() => {
+                    // Navegar al login después de que el usuario haya sido creado
+                    this.props.navigation.navigate('login');
+                });
+    
+                // Guardamos el usuario en Firestore
+                return db.collection('users').add({
                     owner: auth.currentUser.email,
                     createdAt: Date.now(),
                     username: username,
-                    imagenPerfil: ''
-                })
-                .then(
-                    () => this.props.navigation.navigate('anidada')
-                )
-
-                
-            }
-        })
-        .catch(err => {
-            if (err.code === "auth/email-already-in-use"){
-                this.setState({error: 'el email ya esta en uso'})
-            }
-        })
-
+                });
+            })
+            .catch(err => {
+                if (err.code === "auth/email-already-in-use") {
+                    this.setState({ error: 'El email ya está en uso' });
+                } else {
+                    console.error(err);
+                    this.setState({ error: 'Hubo un problema al crear la cuenta. Intenta nuevamente.' });
+                }
+            });
     }
-
+    
     render() {
         return (
             <View style={styles.container}>
@@ -94,13 +94,10 @@ export default class FormularioRegister extends Component {
                         )
                     }
                 >
-                    <TouchableOpacity
-                         onPress={()=> this.props.navigation.navigate("login")}>
-                    
                     <Text style={{ color: 'white', textAlign: 'center' }}>
                        Registrarse
                         </Text>
-                        </TouchableOpacity>
+                   
                 </TouchableOpacity>
             
             </View>

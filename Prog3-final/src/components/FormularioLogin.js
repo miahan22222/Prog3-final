@@ -8,24 +8,28 @@ export default class FormularioLogin extends Component {
         this.state = {
             email: '',
             password: '',
-            login: false,
             error: ''
         };
     }
-
-    componentDidMount(){
-        auth.onAuthStateChanged(user=> console.log("El usuario es: ", JSON.stringify(user,null,4)))
+    componentDidMount() {
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                console.log("Usuario logueado:", user.email);
+                this.props.navigation.navigate('home');
+            } else {
+                console.log("No hay usuario logueado.");
+            }
+        });
     }
+    
     submit(email, password){
 
-        auth.signInWithWithEmailAndPassword(email, password)
-        .then((user) => { this.setState({logued: true})
-        .then(()=> this.props.navigation.navigate("home"))
-           
-        })
+        auth
+        .signInWithEmailAndPassword(this.state.email, this.state.password)
+        .then(()=> this.props.navigation.navigate('home' ))
         .catch(err => {
           
-                this.setState({error: 'Fallo login'})
+                this.setState({error: 'Email o contraseña incorrectos. Inténtalo de nuevo.' });
             
         })
 
@@ -62,13 +66,12 @@ export default class FormularioLogin extends Component {
                         )
                     }
                 >
-                    <TouchableOpacity
-                         onPress={()=> this.props.navigation.navigate("home")}>
+                    
                     
                     <Text style={{ color: 'white', textAlign: 'center' }}>
                        Loguearse
                         </Text>
-                        </TouchableOpacity>
+                   
                 </TouchableOpacity>
             
             </View>

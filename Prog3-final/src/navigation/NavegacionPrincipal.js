@@ -1,19 +1,32 @@
-import React, { Component } from 'react'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import Login from '../screens/Login'
-import Register from '../screens/Register'
-//import NavegacionAnidada from './NavegacionAnidada'
+import React, { Component } from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Login from '../screens/Login';
+import Register from '../screens/Register';
+import NavegacionAnidada from './NavegacionAnidada'; 
 
-const Stack = createNativeStackNavigator()
+const Stack = createNativeStackNavigator();
 
 export default class NavegacionPrincipal extends Component {
   render() {
-   
-     //   <Stack.Navigator>
-       //     <Stack.Screen name='login' component={Login} options={{headerShown: false}} />
-         //   <Stack.Screen name='register' component={Register}  options={{headerShown: false}} />
-          
-    //    </Stack.Navigator>
-    
+    return (
+      <Stack.Navigator>
+        <Stack.Screen
+          name='login'
+          component={Login}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name='register'
+          component={Register}
+          options={{ headerShown: false }}
+        />
+     
+        <Stack.Screen
+          name='home'
+          component={NavegacionAnidada}
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
+    );
   }
 }

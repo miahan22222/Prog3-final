@@ -6,7 +6,6 @@ export default class CrearPost extends Component {
     constructor(props){
         super(props)
         this.state = {
-            username: '',
             post: '',
             error: ""
         }

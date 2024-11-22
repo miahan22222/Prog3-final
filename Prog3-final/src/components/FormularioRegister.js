@@ -14,20 +14,32 @@ export default class FormularioRegister extends Component {
     }
 
     submit(email, username, password){
-        if (!email.includes('@') ){
-            this.setState({ error: 'Ingrese un formato de email valido/ Complete el campo' });
-            return;
-        }
+        if(email === '') {
+            this.setState({ error: 'Complete el campo EMAIL' });
+        return}
+
+        if(username === '') {
+        this.setState({ error: 'Complete el campo USERNAME' })
+        return}
+
+        if(password.length === 0) {
+            this.setState({ error: 'Complete el campo PASSWORD' })
+            return}
+
+        // if (!email.includes('@') ){
+        //     this.setState({ error: 'Ingrese un formato de email valido' });
+        //     return;
+        // }
     
-        if (username.length < 2) {
-            this.setState({ error: 'Ingrese un username/ Complete el campo' });
-            return;
-        }
+        // if (username.length < 2) {
+        //     this.setState({ error: 'Ingrese un username más largo' });
+        //     return;
+        // }
     
-        if (password.length < 3) {
-            this.setState({ error: 'Ingrese una password más larga/ Complete el campo' });
-            return;
-        }
+        // if (password.length < 5) {
+        //     this.setState({ error: 'Ingrese una password con minimo 5 digitos' });
+        //     return;
+        // }
     
         auth.createUserWithEmailAndPassword(email, password)
             .then(() => {

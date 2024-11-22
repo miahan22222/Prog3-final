@@ -12,7 +12,6 @@ export default class Profile extends Component {
   }
 
   componentDidMount() {
-    // Cargar información del usuario
     db.collection('users')
       .where('owner', '==', auth.currentUser.email)
       .onSnapshot((docs) => {
@@ -68,6 +67,13 @@ export default class Profile extends Component {
           <Text>Cargando información del usuario...</Text>
         )}
 
+        {posteos.length === 0
+        ?
+        (
+            <Text style={styles.nohay}>¡Haz tu primer posteo!</Text>
+        )
+    :
+    (
         <FlatList
           data={posteos}
           keyExtractor={(item) => item.id}
@@ -83,6 +89,8 @@ export default class Profile extends Component {
             </View>
           )}
         />
+    )}
+        
 
         <TouchableOpacity style={styles.logoutButton} onPress={() => this.logout()}>
           <Text style={styles.logoutButtonText}>Logout</Text>

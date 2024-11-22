@@ -8,22 +8,30 @@ export default class Post extends Component {
     super(props);
     this.state = {
       esLikeado: false,
-      likes: this.props.item.data.likesCount || 0, // Iniciar con likesCount en 0 si no tiene CHEQUEAR
+      likes: this.props.item.data.likesCount ,
+      userEmail: null
     };
   }
 
   componentDidMount() {
-    const userEmail = auth.currentUser ? auth.currentUser.email : null;
-    const { arrLikes, likesCount } = this.props.item.data;
-
-    if (arrLikes && arrLikes.includes(userEmail)) {
-      this.setState({ esLikeado: true });
-    }
-
-    if (likesCount !== undefined) {
+    if (auth.currentUser) {
+      const userEmail = auth.currentUser.email;
+      const { arrLikes, likesCount } = this.props.item.data;
+      
+      if (likesCount !== undefined) {
       this.setState({ likes: likesCount });
+       }
+       
+      this.setState({ userEmail, likes: likesCount });
+      
+      if (arrLikes && arrLikes.includes(userEmail)) {
+        this.setState({ esLikeado: true });
+      }
+      
+      
     }
   }
+  
 
   actualizarLike(idDocumento) {
     db.collection('posts')
@@ -41,7 +49,6 @@ export default class Post extends Component {
   }
 
   noLike(idDocumento) {
-    // Eliminamos el like del post en la base de datos
     db.collection('posts')
       .doc(idDocumento)
       .update({

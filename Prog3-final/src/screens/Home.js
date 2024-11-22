@@ -40,8 +40,15 @@ export default class Home extends Component {
 
     render() {
         return (
+        
         <View style={styles.container}>
-            <Text style={styles.title}>Todos Los Posts</Text>
+          <Text style={styles.title}>Todos Los Posts</Text>
+
+          {this.state.todosLosPosts.length === 0
+          ?
+            (<Text style={styles.nohay}>¡No hay posts, sé el primero en postear!</Text>)
+            :
+            (
             <FlatList
                 data={this.state.todosLosPosts}
                 keyExtractor={ ( item ) => item.id.toString() }
@@ -49,6 +56,9 @@ export default class Home extends Component {
                 <Post item={item} />
             }
             />
+            )
+        }
+            
              
  
         </View>
@@ -66,6 +76,12 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 20,
+  },
+  nohay: {
+    fontSize: 14,
     fontWeight: 'bold',
     color: '#333',
     marginBottom: 20,

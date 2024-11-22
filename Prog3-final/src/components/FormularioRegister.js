@@ -24,7 +24,7 @@ export default class FormularioRegister extends Component {
             return;
         }
     
-        if (password.length < 5) {
+        if (password.length < 3) {
             this.setState({ error: 'Ingrese una password más larga/ Complete el campo' });
             return;
         }
@@ -33,6 +33,7 @@ export default class FormularioRegister extends Component {
             .then(() => {
                 // Cuando el usuario se crea con éxito, lo desconectamos inmediatamente xq sino entiende que se logueo 
                 //en firebase y no funciona, solo se registra no deberia entender como que se logueo
+                // recien lei en slack que a todos les pasa lo mimso y que esta bien si lleva directo a home ya que firebase identifica una sesion abierta
                 auth.signOut().then(() => {
                     // Navegar al login después de que el usuario haya sido creado
                     this.props.navigation.navigate('login');
@@ -46,12 +47,12 @@ export default class FormularioRegister extends Component {
                 });
             })
             .catch(err => {
-                if (err.code === "auth/email-already-in-use") {
-                    this.setState({ error: 'El email ya está en uso' });
-                } else {
-                    console.error(err);
-                    this.setState({ error: 'Hubo un problema al crear la cuenta. Intenta nuevamente.' });
-                }
+                if (err.code) {
+                    this.setState({ error: err.code});
+                // } else {
+                //     console.error(err);
+                //     this.setState({ error: 'Hubo un problema al crear la cuenta. Intenta nuevamente.' });
+                 }
             });
     }
     

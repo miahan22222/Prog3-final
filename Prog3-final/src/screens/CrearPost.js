@@ -17,14 +17,11 @@ export default class CrearPost extends Component {
         if(
             this.state.post !== '' && this.state.post.length >0
         ){
-            
             db.collection('posts').add({
                 owner: auth.currentUser.email,
                 createdAt: Date.now(),
                 post: this.state.post,
                 arrLikes: [],
-                
-                
             })
             .then(
                 () => this.props.navigation.navigate( 'home' )
@@ -34,7 +31,6 @@ export default class CrearPost extends Component {
             })
             
         }
-            
             
     }
     

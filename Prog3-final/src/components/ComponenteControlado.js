@@ -23,15 +23,14 @@ export default class ComponenteControlado extends Component {
       <View style={styles.container}>
         <TextInput
           style={styles.input}
-          placeholder="¿Qué quieres buscar?"
+          placeholder="¿Qué quieres filtrar?"
           keyboardType="default"
           onChangeText={(text) => this.controlarInputs(text)}
           value={this.state.valorInput1}
         />
+        <Text> Todos los usuarios</Text>
 
-        <TouchableOpacity style={styles.btn}>
-          <Text style={styles.btnText}>Buscar</Text>
-        </TouchableOpacity>
+       
       </View>
     );
   }

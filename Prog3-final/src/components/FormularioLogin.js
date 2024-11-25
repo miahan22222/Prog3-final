@@ -65,9 +65,7 @@ export default class FormularioLogin extends Component {
                             this.state.password
                         )
                     }
-                >
-                    
-                    
+                >    
                     <Text style={{ color: 'white', textAlign: 'center' }}>
                        Loguearse
                         </Text>

@@ -31,8 +31,9 @@ export default class FormularioRegister extends Component {
         auth.createUserWithEmailAndPassword(email, password)
             .then(() => {
                 // Cuando el usuario se crea con éxito, lo desconectamos inmediatamente xq sino entiende que se logueo 
-                //en firebase y no funciona, solo se registra no deberia entender como que se logueo
+                //en firebase y no llega al login sino que directo a home, 
                 // recien lei en slack que a todos les pasa lo mimso y que esta bien si lleva directo a home ya que firebase identifica una sesion abierta
+                // igualmente le cerramos sesion asi efectivamente puede llegar a login
                 auth.signOut().then(() => {
                     this.props.navigation.navigate('login');
                 });

@@ -15,12 +15,12 @@ export default class Profile extends Component {
         db.collection('users')
         .where('owner', '==', auth.currentUser.email)
         .onSnapshot((docs) => {
-            let userInfo = null;
+            let arrDocs = null;
             docs.forEach((doc) => {
-            userInfo = { id: doc.id, data: doc.data() };
+            arrDocs = { id: doc.id, data: doc.data() };
             });
 
-            this.setState({ userInfo });
+            this.setState({ userInfo:arrDocs });
         });
 
         db.collection('posts')

@@ -9,9 +9,9 @@ export default class Post extends Component {
     this.state = {
       esLikeado: false,
       likes: this.props.item.data.arrLikes.length,
-      userEmail: null,
-      
-    }
+      userEmail: null
+     
+    };
   }
 
   componentDidMount() {
@@ -23,7 +23,7 @@ export default class Post extends Component {
         this.setState({ userEmail: email1, esLikeado: true });
       }
     } else {
-      console.log("No hay usuario logueado");
+      console.warn("No hay usuario logueado");
     }
   }
   

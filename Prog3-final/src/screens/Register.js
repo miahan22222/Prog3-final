@@ -3,31 +3,31 @@ import React, { Component } from 'react';
 import FormularioRegister from '../components/FormularioRegister';
 
 export default class Register extends Component {
-  constructor(props) {
-    super(props);
-  }
+    constructor(props) {
+      super(props);
+    }
 
-  irAlLogin() {
-    this.props.navigation.navigate('login');
-  }
+    irAlLogin() {
+      this.props.navigation.navigate('login');
+    }
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.title}>Registro</Text>
-        <FormularioRegister navigation={this.props.navigation} />
-        <TouchableOpacity
-          style={styles.loginRedirectButton}
-          onPress={() => this.irAlLogin()}
-        >
-          <Text style={styles.loginRedirectText}>
-            Ya tengo una cuenta existente, ¡Quiero iniciar sesión!
-          </Text>
-        </TouchableOpacity>
-      </View>
-    );
+    render() {
+      return (
+        <View style={styles.container}>
+          <Text style={styles.title}>Registro</Text>
+          <FormularioRegister navigation={this.props.navigation} />
+          <TouchableOpacity
+            style={styles.loginRedirectButton}
+            onPress={() => this.irAlLogin()}
+          >
+            <Text style={styles.loginRedirectText}>
+              Ya tengo una cuenta existente, ¡Quiero iniciar sesión!
+            </Text>
+          </TouchableOpacity>
+        </View>
+      );
+    }
   }
-}
 
 const styles = StyleSheet.create({
   container: {

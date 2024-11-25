@@ -8,29 +8,25 @@ export default class Post extends Component {
     super(props);
     this.state = {
       esLikeado: false,
-      likes: this.props.item.data.likesCount ,
-      userEmail: null
-    };
-  }
-
-  componentDidMount() {
-    if (auth.currentUser) {
-      const userEmail = auth.currentUser.email;
-      const { arrLikes, likesCount } = this.props.item.data;
-      
-      if (likesCount !== undefined) {
-      this.setState({ likes: likesCount });
-       }
-       
-      this.setState({ userEmail, likes: likesCount });
-      
-      if (arrLikes && arrLikes.includes(userEmail)) {
-        this.setState({ esLikeado: true });
-      }
-      
+      likes: this.props.item.data.arrLikes.length,
+      userEmail: null,
       
     }
   }
+
+  componentDidMount() {
+    const user = auth.currentUser;
+    if (user) {
+      const email1 = user.email;
+      const { arrLikes } = this.props.item.data;
+      if (arrLikes && arrLikes.includes(email1)) {
+        this.setState({ userEmail: email1, esLikeado: true });
+      }
+    } else {
+      console.log("No hay usuario logueado");
+    }
+  }
+  
   
 
   actualizarLike(idDocumento) {
@@ -38,7 +34,6 @@ export default class Post extends Component {
       .doc(idDocumento)
       .update({
         arrLikes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email),
-        likesCount: firebase.firestore.FieldValue.increment(1),
       })
       .then(() => {
         this.setState({
@@ -53,7 +48,6 @@ export default class Post extends Component {
       .doc(idDocumento)
       .update({
         arrLikes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email), 
-        likesCount: firebase.firestore.FieldValue.increment(-1)
       })
       .then(() => {
         this.setState({

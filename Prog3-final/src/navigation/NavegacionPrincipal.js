@@ -22,7 +22,7 @@ export default class NavegacionPrincipal extends Component {
         />
      
         <Stack.Screen
-          name='home'
+          name='anidada'
           component={NavegacionAnidada}
           options={{ headerShown: false }}
         />

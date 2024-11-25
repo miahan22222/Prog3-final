@@ -26,20 +26,7 @@ export default class FormularioRegister extends Component {
             this.setState({ error: 'Complete el campo PASSWORD' })
             return}
 
-        // if (!email.includes('@') ){
-        //     this.setState({ error: 'Ingrese un formato de email valido' });
-        //     return;
-        // }
-    
-        // if (username.length < 2) {
-        //     this.setState({ error: 'Ingrese un username más largo' });
-        //     return;
-        // }
-    
-        // if (password.length < 5) {
-        //     this.setState({ error: 'Ingrese una password con minimo 5 digitos' });
-        //     return;
-        // }
+       
     
         auth.createUserWithEmailAndPassword(email, password)
             .then(() => {
@@ -47,11 +34,9 @@ export default class FormularioRegister extends Component {
                 //en firebase y no funciona, solo se registra no deberia entender como que se logueo
                 // recien lei en slack que a todos les pasa lo mimso y que esta bien si lleva directo a home ya que firebase identifica una sesion abierta
                 auth.signOut().then(() => {
-                    // Navegar al login después de que el usuario haya sido creado
                     this.props.navigation.navigate('login');
                 });
     
-                // Guardamos el usuario en Firestore
                 return db.collection('users').add({
                     owner: auth.currentUser.email,
                     createdAt: Date.now(),
@@ -61,9 +46,6 @@ export default class FormularioRegister extends Component {
             .catch(err => {
                 if (err.code) {
                     this.setState({ error: err.code});
-                // } else {
-                //     console.error(err);
-                //     this.setState({ error: 'Hubo un problema al crear la cuenta. Intenta nuevamente.' });
                  }
             });
     }

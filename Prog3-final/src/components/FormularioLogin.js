@@ -15,7 +15,7 @@ export default class FormularioLogin extends Component {
         auth.onAuthStateChanged((user) => {
             if (user) {
                 console.log("Usuario logueado:", user.email);
-                this.props.navigation.navigate('home');
+                this.props.navigation.navigate('anidada');
             } else {
                 console.log("No hay usuario logueado.");
             }
@@ -26,7 +26,7 @@ export default class FormularioLogin extends Component {
 
         auth
         .signInWithEmailAndPassword(this.state.email, this.state.password)
-        .then(()=> this.props.navigation.navigate('home' ))
+        .then(()=> this.props.navigation.navigate('anidada' ))
         .catch(err => {
           
                 this.setState({error: 'Email o contraseña incorrectos. Inténtalo de nuevo.' });

@@ -22,7 +22,7 @@ export default class CrearPost extends Component {
                 owner: auth.currentUser.email,
                 createdAt: Date.now(),
                 post: this.state.post,
-                likesCount: 0,
+                arrLikes: [],
                 
                 
             })

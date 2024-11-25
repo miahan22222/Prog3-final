@@ -120,6 +120,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 20,
   },
+  nohay: {
+    fontSize: 14,
+    color: '#1E88E5',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
   userInfo: {
     marginBottom: 20,
   },

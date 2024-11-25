@@ -56,6 +56,7 @@ export default class BuscadorUsers extends Component {
         <ComponenteControlado
           filtrarUser={(nombre) => this.filtrarUser(nombre)}
         />
+        <Text style={styles.title2}>Todos los usuarios</Text>
 
         {this.state.mensajeError ? (
           <Text style={styles.errorText}>{this.state.mensajeError}</Text>
@@ -87,6 +88,13 @@ const styles = StyleSheet.create({
     color: '#333',
     marginBottom: 20,
     textAlign: 'center',
+  },
+  title2: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 20,
+    color: '#1E88E5',
   },
   errorText: {
     color: 'red',

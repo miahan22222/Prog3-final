@@ -81,9 +81,9 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   nohay: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '#333',
+    fontSize: 18,
+    color: '#1E88E5',
     marginBottom: 20,
+    textAlign: 'center',
   }
 })

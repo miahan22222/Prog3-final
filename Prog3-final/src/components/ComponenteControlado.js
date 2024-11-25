@@ -28,7 +28,6 @@ export default class ComponenteControlado extends Component {
           onChangeText={(text) => this.controlarInputs(text)}
           value={this.state.valorInput1}
         />
-        <Text> Todos los usuarios</Text>
 
        
       </View>
